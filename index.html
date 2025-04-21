@@ -16,7 +16,9 @@
     <h1> Att göra lista</h1>
     <form id="todoForm">
       <div class="input-wrapper">
+        <label for="taskInput" class="visually-hidden">Ny uppgift</label>
         <input type="text" id="taskInput" placeholder="Ny uppgift">
+        <label for="prioritySelect" class="visually-hidden">Prioritet</label>
         <select id="prioritySelect">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -34,6 +36,21 @@
 
     <ul id="todoList"></ul>
   </main>
+
+    <!-- Template for to-do list items -->
+    <template id="todoItemTemplate">
+      <li>
+        <input type="checkbox">
+        <span></span>
+        <div class="todo-dates"></div>
+        <button class="edit-btn" aria-label="Redigera uppgift">
+          <i class="fas fa-edit" aria-hidden="true"></i>
+        </button>
+        <button class="delete-btn" aria-label="Ta bort uppgift">
+          <i class="fas fa-trash-alt" aria-hidden="true"></i>
+        </button>
+      </li>
+    </template>
   <script type="module" src="src/main.ts"></script>
 </body>
 
