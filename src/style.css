@@ -163,6 +163,11 @@ li button.delete-btn {
   transition: opacity 0.5s ease-in-out;
 }
 
+.visually-hidden{
+  position: absolute;
+  left: -9999px;
+}
+
 /* Responsiv design */
 @media (max-width: 500px) {
   main {
