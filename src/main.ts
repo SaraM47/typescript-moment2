@@ -87,7 +87,7 @@ form.addEventListener('submit', (e) => {
   const success = todoList.addTodo(task, priority);
   if (!success) {
     // Show error message if the values are invalid
-    errorMessageDiv.textContent = 'Felaktiga värden! Kontrollera uppgiften och prioriteten.';
+    errorMessageDiv.textContent = 'Fyll i fältet! Kontrollera att du har skrivit uppgiften och valt prioriteten.';
     errorMessageDiv.style.display = 'block';
     return;
   }
