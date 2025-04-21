@@ -12,6 +12,8 @@ const todoUl = document.getElementById('todoList') as HTMLUListElement;
 const errorMessageDiv = document.getElementById('errorMessage') as HTMLDivElement;
 const confirmationMessageDiv = document.getElementById('confirmationMessage') as HTMLDivElement;
 
+const template = document.getElementById('todoItemTemplate') as HTMLTemplateElement;
+
 function renderTodos() {
   todoUl.innerHTML = '';
   
@@ -19,40 +21,38 @@ function renderTodos() {
   const sortedTodos = todoList.getTodos().sort((a, b) => a.priority - b.priority);
   
   sortedTodos.forEach((todo, index) => {
-    const li = document.createElement('li');
+    // Clone the <template> content
+    const clone = template.content.cloneNode(true) as HTMLElement;
+    const li = clone.querySelector('li')!;
+    const checkbox = li.querySelector('input[type="checkbox"]')!;
+    const span = li.querySelector('span')!;
+    const datesDiv = li.querySelector('.todo-dates')!;
+    const editBtn = li.querySelector('.edit-btn')!;
+    const deleteBtn = li.querySelector('.delete-btn')!;
 
-    // Add 'completed' class if the task is done
+    // Set task data
     if (todo.completed) {
       li.classList.add('completed');
     }
 
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
     checkbox.checked = todo.completed;
     checkbox.addEventListener('change', () => {
       todoList.markTodoCompleted(index);
       renderTodos();
     });
 
-    const span = document.createElement('span');
     span.textContent = `[${todo.priority}] ${todo.task}`;
     span.style.textDecoration = todo.completed ? 'line-through' : 'none';
 
     // Show creation date and (if available) completion date
     const createdDate = new Date(todo.createdAt).toLocaleString();
     const completedDate = todo.completedAt ? new Date(todo.completedAt).toLocaleString() : null;
-
-    const datesDiv = document.createElement('div');
-    datesDiv.className = 'todo-dates';
     datesDiv.innerHTML = `
       <small>Skapad: ${createdDate}</small><br>
       ${completedDate ? `<small>Avklarad: ${completedDate}</small>` : ''}
     `;
 
-    // Creates edit button with Font Awesome icon
-    const editBtn = document.createElement('button');
-    editBtn.innerHTML = '<i class="fas fa-edit"></i>'; 
-    editBtn.classList.add('edit-btn');
+    // Edit task logic
     editBtn.addEventListener('click', () => {
       const newTask = prompt('Ändra uppgift:', todo.task);
       const newPriority = parseInt(prompt('Ny prioritet (1–3):', todo.priority.toString()) || '');
@@ -65,21 +65,14 @@ function renderTodos() {
       }
     });
 
-    // Create delete button with Font Awesome icon
-    const deleteBtn = document.createElement('button');
-    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
-    deleteBtn.classList.add('delete-btn'); 
+    // Delete task logic
     deleteBtn.addEventListener('click', () => {
       todoList.removeTodo(index);
       renderTodos();
       showConfirmationMessage('Uppgiften har tagits bort!');
     });
 
-    li.appendChild(checkbox);
-    li.appendChild(span);
-    li.appendChild(datesDiv);
-    li.appendChild(editBtn);
-    li.appendChild(deleteBtn);
+    // Add item to the list
     todoUl.appendChild(li);
   });
 }
