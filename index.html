@@ -1,13 +1,40 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Moment 2 - Att göra lista</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moment 2 - Att göra-lista</title>
+  <link rel="stylesheet" href="src/style.css">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <main>
+    <h1> Att göra lista</h1>
+    <form id="todoForm">
+      <div class="input-wrapper">
+        <input type="text" id="taskInput" placeholder="Ny uppgift">
+        <select id="prioritySelect">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+      <button type="submit">Lägg till</button>
+    </form>
+
+    <!-- Add a div to display error messages -->
+    <div id="errorMessage" style="display: none;"></div>
+
+    <!-- Add a div to display confirmation messages -->
+    <div id="confirmationMessage" class="confirmation-message" style="display: none;"></div>
+
+    <ul id="todoList"></ul>
+  </main>
+  <script type="module" src="src/main.ts"></script>
+</body>
+
 </html>
