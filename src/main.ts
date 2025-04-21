@@ -1,4 +1,5 @@
 import { TodoList } from './todolist';
+import { Todo } from './todo';
 
 const todoList = new TodoList();
 
@@ -20,11 +21,11 @@ function renderTodos() {
   // Sort tasks by priority (1 is highest, 3 is lowest)
   const sortedTodos = todoList.getTodos().sort((a, b) => a.priority - b.priority);
   
-  sortedTodos.forEach((todo, index) => {
+  sortedTodos.forEach((todo: Todo, index: number) => {
     // Clone the <template> content
     const clone = template.content.cloneNode(true) as HTMLElement;
     const li = clone.querySelector('li')!;
-    const checkbox = li.querySelector('input[type="checkbox"]')!;
+    const checkbox = li.querySelector('input[type="checkbox"]') as HTMLInputElement;
     const span = li.querySelector('span')!;
     const datesDiv = li.querySelector('.todo-dates')!;
     const editBtn = li.querySelector('.edit-btn')!;
