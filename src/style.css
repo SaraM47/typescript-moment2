@@ -164,6 +164,11 @@ li button.delete-btn {
 
 /* Responsiv design */
 @media (max-width: 500px) {
+
+  main{
+    border-radius: unset;
+  }
+
   .input-wrapper {
     flex-direction: column;
     border-radius: 16px;
