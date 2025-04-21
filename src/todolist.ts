@@ -71,7 +71,7 @@ export class TodoList {
   loadFromLocalStorage(): void {
     const data = localStorage.getItem('todos');
     if (data) {
-      this.todos = JSON.parse(data); // Parse the saved data and assign it to the todos array
+      this.todos = JSON.parse(data) as Todo[]; // Parse the saved data and assign it to the todos array
     }
   }
 }
